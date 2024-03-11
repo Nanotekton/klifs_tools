@@ -9,7 +9,7 @@ Required packages:
 * tqdm
 * pandas
 * numpy
-* (opencadd-klifs)[https://opencadd.readthedocs.io/en/latest/databases_klifs.html]
+* [opencadd-klifs](https://opencadd.readthedocs.io/en/latest/databases_klifs.html)
 
 # Key step 1: download structures from KLIFS
 
