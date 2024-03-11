@@ -20,15 +20,15 @@ def download_all_klifs_structures(summary_file:str, directory:str, smoke_test:bo
             continue
         try:
             pdb_path, mol_path = download_structure(structure_dict['StructureId'], directory, session=session)
+            structure_dict['pdb_path'] = pdb_path
+            structure_dict['mol_path'] = mol_path
+            
+            subpocket_crd = get_subpocket_crd_and_insert_marks(subpocket_residues, pdb_path)
         except:
             print(traceback.format_exc())
             continue
         if mol_path == None:
             continue
-        structure_dict['pdb_path'] = pdb_path
-        structure_dict['mol_path'] = mol_path
-        
-        subpocket_crd = get_subpocket_crd_and_insert_marks(subpocket_residues, pdb_path)
         for k, v in subpocket_crd.items():
             for name, val in zip('xyz', v):
                 structure_dict[f'{k}.{name}'] = val
