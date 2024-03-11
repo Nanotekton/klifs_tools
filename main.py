@@ -3,6 +3,7 @@ from klifs_tools import klifs_structure_iterator, get_subpocket_to_residue_map, 
 from opencadd.databases.klifs import setup_remote
 from rdkit import Chem
 import pandas as pd
+import traceback
 
 app = typer.Typer()
 
@@ -17,7 +18,11 @@ def download_all_klifs_structures(summary_file:str, directory:str, smoke_test:bo
         subpocket_residues = get_subpocket_to_residue_map(structure_dict['StructureId'], session=session)
         if not subpocket_residues:
             continue
-        pdb_path, mol_path = download_structure(structure_dict['StructureId'], directory, session=session)
+        try:
+            pdb_path, mol_path = download_structure(structure_dict['StructureId'], directory, session=session)
+        except:
+            print(traceback.format_exc())
+            continue
         if mol_path == None:
             continue
         structure_dict['pdb_path'] = pdb_path

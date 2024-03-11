@@ -164,7 +164,7 @@ def read_ca_center(residues, pdblines):
         y = float(line[38:46].strip())
         z = float(line[46:54].strip())
         vectors.append(np.array([x,y,z]))
-    assert len(vectors)==len(residues), f'too many chains?, {residues}'
+    assert len(vectors)==len(residues), f'too many chains?, {residues}, vectors found: {len(vectors)}'
     return np.mean(vectors, axis=0)
 
 def simplify_structure_record(structure_row):
